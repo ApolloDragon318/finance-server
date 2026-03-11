@@ -7,7 +7,8 @@ const InvoiceSchema = new mongoose.Schema({
 	// Snapshot of the project's percentage at the time the invoice is created
 	percentage: { type: Number, required: true, min: 0, max: 100 },
 	// Snapshot of the admin who should receive the remainder share
-	adminId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', default: null, index: true }
+	adminId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', default: null, index: true },
+	reason: { type: String, default: '' }
 }, { timestamps: true });
 
 const Invoice = mongoose.model('Invoice', InvoiceSchema);

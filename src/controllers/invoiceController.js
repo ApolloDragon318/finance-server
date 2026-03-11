@@ -5,13 +5,14 @@ const Project = require('../models/Project');
 exports.createInvoice = async (req, res) => {
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
-	const { projectId, amount, incomeDate } = req.body;
+	const { projectId, amount, incomeDate, reason } = req.body;
 	const project = await Project.findById(projectId).populate('assignedAdmin owner', 'name role');
 	if (!project) return res.status(404).json({ message: 'Project not found' });
 	const invoice = await Invoice.create({
 		projectId,
 		amount,
 		incomeDate,
+		reason: reason || '',
 		percentage: project.percentage,
 		// Remainder goes to the project's owner admin
 		adminId: project.assignedAdmin?._id || null

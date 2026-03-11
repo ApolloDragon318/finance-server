@@ -19,6 +19,7 @@ router.post(
 	body('projectId').isMongoId(),
 	body('amount').isFloat(),
 	body('incomeDate').isISO8601(),
+	body('reason').optional().isString().trim(),
 	invoiceController.createInvoice
 );
 
