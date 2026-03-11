@@ -17,7 +17,7 @@ router.post(
 	authenticate,
 	authorizeRoles('admin'),
 	body('projectId').isMongoId(),
-	body('amount').isFloat({ min: 0 }),
+	body('amount').isFloat(),
 	body('incomeDate').isISO8601(),
 	invoiceController.createInvoice
 );
